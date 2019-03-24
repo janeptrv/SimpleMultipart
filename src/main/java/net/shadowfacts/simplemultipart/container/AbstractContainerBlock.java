@@ -1,11 +1,10 @@
 package net.shadowfacts.simplemultipart.container;
 
-import net.fabricmc.fabric.block.FabricBlockSettings;
 import net.minecraft.block.*;
 import net.minecraft.entity.VerticalEntityPosition;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.util.BlockHitResult;
 import net.minecraft.util.Hand;
+import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.shape.VoxelShape;
@@ -13,6 +12,8 @@ import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.ExtendedBlockView;
 import net.minecraft.world.World;
+import net.fabricmc.fabric.api.block.FabricBlockSettings;
+
 import net.shadowfacts.simplemultipart.client.util.RenderStateProvider;
 import net.shadowfacts.simplemultipart.util.MultipartHelper;
 import net.shadowfacts.simplemultipart.util.MultipartHitResult;
@@ -86,20 +87,20 @@ public abstract class AbstractContainerBlock extends Block implements BlockEntit
 		return getCombinedShape(world, pos);
 	}
 
-	@Override
-	@Deprecated
-	public boolean hasSolidTopSurface(BlockState state, BlockView world, BlockPos pos) {
-		MultipartContainer container = (MultipartContainer)world.getBlockEntity(pos);
-		if (container == null) {
-			return false;
-		}
-
-		return container.getParts().stream()
-				.anyMatch(view -> {
-					VoxelShape shape = view.getState().getBoundingShape(view);
-					return ShapeUtils.hasSolidSide(shape, Direction.UP);
-				});
-	}
+//	@Override
+//	@Deprecated
+//	public boolean hasSolidTopSurface(BlockState state, BlockView world, BlockPos pos) {
+//		MultipartContainer container = (MultipartContainer)world.getBlockEntity(pos);
+//		if (container == null) {
+//			return false;
+//		}
+//
+//		return container.getParts().stream()
+//				.anyMatch(view -> {
+//					VoxelShape shape = view.getState().getBoundingShape(view);
+//					return ShapeUtils.hasSolidSide(shape, Direction.UP);
+//				});
+//	}
 
 	@Override
 	public abstract AbstractContainerBlockEntity createBlockEntity(BlockView world);

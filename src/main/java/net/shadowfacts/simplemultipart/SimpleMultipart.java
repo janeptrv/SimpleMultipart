@@ -4,15 +4,16 @@ import net.fabricmc.api.ModInitializer;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.IdRegistry;
 import net.minecraft.util.registry.Registry;
+import net.minecraft.util.registry.SimpleRegistry;
+import net.minecraft.world.loot.context.LootContextParameter;
+import net.minecraft.world.loot.context.LootContextParameters;
 import net.minecraft.world.loot.context.LootContextType;
 import net.minecraft.world.loot.context.LootContextTypes;
-import net.minecraft.world.loot.context.Parameter;
-import net.minecraft.world.loot.context.Parameters;
 import net.shadowfacts.simplemultipart.container.*;
 import net.shadowfacts.simplemultipart.multipart.Multipart;
 import net.shadowfacts.simplemultipart.multipart.MultipartState;
+import net.shadowfacts.simplemultipart.test.MultipartTestMod;
 
 import java.util.function.BiFunction;
 import java.util.function.Consumer;
@@ -27,7 +28,7 @@ public class SimpleMultipart implements ModInitializer {
 
 	public static final Registry<Multipart> MULTIPART = createMultipartRegistry();
 
-	public static final Parameter<MultipartState> MULTIPART_STATE_PARAMETER = new Parameter<>(new Identifier(MODID, "multipart_state"));
+	public static final LootContextParameter<MultipartState> MULTIPART_STATE_PARAMETER = new LootContextParameter<>(new Identifier(MODID, "multipart_state"));
 	public static final LootContextType MULTIPART_LOOT_CONTEXT = createMultipartLootContextType();
 
 	public static final ContainerBlock containerBlock = new ContainerBlock();
@@ -43,11 +44,13 @@ public class SimpleMultipart implements ModInitializer {
 		Registry.register(Registry.BLOCK, new Identifier(MODID, "tickable_container"), tickableContainerBlock);
 
 		ContainerEventHandler.register();
+
+		new MultipartTestMod().onInitialize();
 	}
 
 	private static Registry<Multipart> createMultipartRegistry() {
-		IdRegistry<Multipart> registry = new IdRegistry<>();
-		Registry.REGISTRIES.register(new Identifier(MODID, "multipart"), registry);
+		SimpleRegistry<Multipart> registry = new SimpleRegistry<>();
+		Registry.REGISTRIES.add(new Identifier(MODID, "multipart"), registry);
 		return registry;
 	}
 
@@ -68,7 +71,7 @@ public class SimpleMultipart implements ModInitializer {
 		} catch (ClassNotFoundException e) {}
 		return lootContextRegisterFunction.apply(
 				MODID + ":multipart",
-				builder -> builder.require(MULTIPART_STATE_PARAMETER).require(Parameters.POSITION)
+				builder -> builder.require(MULTIPART_STATE_PARAMETER).require(LootContextParameters.POSITION)
 		);
 	}
 
