@@ -1,0 +1,6 @@
+{
+	"parent": "multipart_test:multipart/slab/bottom",
+	"textures": {
+		"texture": "block/gold_block"
+	}
+}

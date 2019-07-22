@@ -1,0 +1,6 @@
+{
+	"parent": "simplemultipart:multipart/center",
+	"textures": {
+		"texture": "block/redstone_block"
+	}
+}

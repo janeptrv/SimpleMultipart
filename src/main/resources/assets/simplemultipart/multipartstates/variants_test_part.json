@@ -1,0 +1,11 @@
+{
+	"variants": {
+		"facing=down": { "model": "multipart_test:multipart/bottom" },
+		"facing=up": { "model": "multipart_test:multipart/bottom", "x": 180 },
+		"facing=north": { "model": "multipart_test:multipart/vertical" },
+		"facing=south": { "model": "multipart_test:multipart/vertical", "y": 180 },
+		"facing=east": { "model": "multipart_test:multipart/vertical", "y": 90 },
+		"facing=west": { "model": "multipart_test:multipart/vertical", "y": 270 },
+		"inventory": { "model":  "multipart_test:multipart/vertical", "y": 180 }
+	}
+}

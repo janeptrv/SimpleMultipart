@@ -191,8 +191,8 @@ public abstract class AbstractContainerBlockEntity extends BlockEntity implement
 		}
 
 		world.markDirty(pos, world.getBlockEntity(pos));
-		world.scheduleBlockRender(pos);
 		BlockState blockState = world.getBlockState(pos);
+		world.scheduleBlockRender(pos, blockState, blockState);
 		world.updateListeners(pos, blockState, blockState, 3);
 
 		// both of these are required, some blocks (e.g. torch) use getStateForNeighborUpdate (used by updateNeighborStates)

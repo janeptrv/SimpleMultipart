@@ -24,6 +24,7 @@ public class MultipartHitResult extends BlockHitResult {
 
 	public MultipartHitResult(Vec3d pos, Direction side, BlockPos blockPos, MultipartView view) {
 		super(pos, side, blockPos, false); // TODO: what does this boolean do?
+		//boolean is related to network packets - only usage is to write (see: net.minecraft.util.PacketByteBuf, writeBlockHitResult)
 		this.view = view;
 	}
 

@@ -3,6 +3,7 @@ package net.shadowfacts.simplemultipart.util;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsageContext;
+import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
 import net.shadowfacts.simplemultipart.container.MultipartContainer;
 
@@ -19,14 +20,14 @@ public class MultipartPlacementContext extends ItemUsageContext {
 	private final MultipartContainer container;
 	private final boolean isOffset;
 
-	public MultipartPlacementContext(MultipartContainer container, boolean isOffset, PlayerEntity player, ItemStack stack, BlockHitResult hitResult) {
-		super(player, stack, hitResult);
+	public MultipartPlacementContext(MultipartContainer container, boolean isOffset, PlayerEntity player, Hand hand, ItemStack stack, BlockHitResult hitResult) {
+		super(player.world, player, hand, stack, hitResult);
 		this.container = container;
 		this.isOffset = isOffset;
 	}
 
 	public MultipartPlacementContext(MultipartContainer container, boolean isOffset, ItemUsageContext context) {
-		this(container, isOffset, context.getPlayer(), context.getItemStack(), new BlockHitResult(context.getPos(), context.getFacing(), context.getBlockPos(), context.method_17699()));
+		this(container, isOffset, context.getPlayer(), context.getHand(), context.getStack(), new BlockHitResult(context.getHitPos(), context.getPlayerFacing(), context.getBlockPos(), context.method_17699()));
 	}
 
 	/**

@@ -1,0 +1,15 @@
+{
+	"multipart": [
+		{
+			"apply": { "model": "multipart_test:multipart/center" }
+		},
+		{
+			"when": { "facing": "down" },
+			"apply": { "model": "multipart_test:multipart/bottom" }
+		},
+		{
+			"when": { "facing": "north" },
+			"apply": { "model": "multipart_test:multipart/vertical" }
+		}
+	]
+}

@@ -1,0 +1,6 @@
+{
+	"parent": "simplemultipart:multipart/slab/top",
+	"textures": {
+		"texture": "block/iron_block"
+	}
+}

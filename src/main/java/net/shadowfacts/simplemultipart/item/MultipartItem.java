@@ -16,7 +16,7 @@ import net.shadowfacts.simplemultipart.util.MultipartPlacementContext;
 /**
  * An {@link Item} implementation that handles placing multiparts.
  *
- * Analogous to {@link net.minecraft.item.block.BlockItem}.
+ * Analogous to {@link net.minecraft.item.BlockItem}.
  *
  * @author shadowfacts
  * @since 0.1.1
@@ -69,8 +69,8 @@ public class MultipartItem extends Item {
 		}
 
 		// Otherwise, get or create a new container and try inserting into that
-		BlockHitResult offsetHitResult = new BlockHitResult(context.getPos(), context.getFacing(), context.getBlockPos().offset(context.getFacing()), context.method_17699());
-		ItemUsageContext offsetContext = new ItemUsageContext(context.getPlayer(), context.getItemStack(), offsetHitResult);
+		BlockHitResult offsetHitResult = new BlockHitResult(context.getHitPos(), context.getPlayerFacing(), context.getBlockPos().offset(context.getPlayerFacing()), context.method_17699());
+		ItemUsageContext offsetContext = new ItemUsageContext(context.getPlayer(), context.getHand(), offsetHitResult);
 		MultipartContainer offsetContainer = getOrCreateContainer(offsetContext);
 		if (offsetContainer != null) {
 			if (tryPlace(new MultipartPlacementContext(offsetContainer, true, offsetContext))) {
@@ -118,7 +118,7 @@ public class MultipartItem extends Item {
 
 		if (context.getContainer().canInsert(placementState)) {
 			context.getContainer().insert(placementState);
-			context.getItemStack().subtractAmount(1);
+			context.getStack().split(1);
 			return true;
 		}
 		return false;
